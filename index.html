@@ -1,0 +1,38 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+  </head>
+  
+  <div class="row w-75 m-5">
+    <h2 class="text-center">Black and White </h2>
+    <!-- Leer -->
+    <div class="col-12  contaienr p-5">
+    
+    
+        <h3>Inserte URL de imagen: </h3>
+      <form action="/cargar">
+        <div class="form-group">
+          <!-- Nombre del archivo -->
+          <input name="url" class="form-control" id="url" />
+        </div>
+  
+        <button type="submit" class="btn btn-info">Consultar archivo</button>
+        
+        
+      </form>
+    </div>
+    <div>
+        <h1>Cargar Imagen</h1>
+    <form action="/cargar" method="GET">
+        <label for="imagen">Selecciona una imagen:</label>
+        <input type="file" id="archivo" name="archivo">
+        <button type="submit">Cargar</button>
+    </form>
+    
+
+
+
+    
+ 
+    </div>
+  </div>
