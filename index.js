@@ -11,7 +11,7 @@ const express = require("express");
 const Jimp = require('jimp');
 const { v4: uuidv4 } = require("uuid");
 const fs = require('fs');
-const path = require('path');
+const path = require('path');  //creo que debemos eliminarlo
 // const _ = require("lodash");
 
 const app = express(); //instancio express
@@ -42,49 +42,16 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
 
-// codigo para leer: 
-// app.get("/leer", (req, res) => {
-//     // Paso 5
-//     const { url } = req.query
-//     //console.log("Valor de parametro nombre: ", nombre)
-//     //console.log("Tipo de dato parametro nombre: ", typeof nombre)
-
-//     // Paso 6
-//     fs.readFile(url, (err, data) => {
-
-//         let mensaje=""
-//         if (err) {
-//             (url)
-//               ? mensaje = url + " No existe, "
-//               : mensaje = "Falta la ruta de la imagen, "
-//           return res.status(500).send(mensaje+err)
-//         }
-
-//         //console.log(data.toString())
-//         //res.send(nombre + " ha sido leido con exito")
-//         //res.send(data)
-//         res.sendFile(__dirname + "/" + nombre)
-//     })
-// })
-
-// Ruta para procesar la imagen
-
-
-
-// const { AUTO } = require('jimp');
-
 app.get('/cargar', async (req, res) => {
     const { url } = req.query; //destructuring, obtengo el parámetro que necesito
     const {archivo} = req.query; //destructuring, obtengo el parámetro que necesito
     try {
-        // Cargar la imagen con la ruta de tu imagen
         // const imagen = await Jimp.read(url) || await Jimp.read(archivo);
-        if (url == '') {
-            throw new Error('Debe proporcionar una URL válida.');
-            // res.status(500).send('Error debe proporcionar url');
+        if (url == '') { //si en el input se introduce un string vacío
+            throw new Error('Debe proporcionar una URL válida.'); //mensaje a mostrar
         }
-        if (!url && !archivo) {
-            throw new Error('Debe proporcionar una URL o una ruta de archivo.');
+        if (!archivo) { //si la variable está vacía, null o undefined
+            throw new Error('Debe proporcionar una ruta de archivo.'); //mensaje a mostrar
         }
         if (url) {
             // Si se proporciona una URL, carga la imagen desde la URL
@@ -107,48 +74,10 @@ app.get('/cargar', async (req, res) => {
     } catch (error) {
       
         // Manejar errores
-        console.error('Error al procesar la imagen:', error.message);
-        // Devuelve una respuesta de error al cliente
-        console.error(typeof error, 'url:' + typeof url);
-        res.status(500).send('Error interno del servidor');
+        console.error('Error al procesar, mensaje del catch:', error.message); //muestra en consola el error que procesa
+        console.error('url:' + typeof url, 'archivo: ' + typeof archivo); //muestra en consola el tipo de error
+        // Devuelve una respuesta de error al cliente, según errores definidos en el try
+        res.status(500).send(error.message);
         
     }
 });
-
-
-
-// app.get('/cargar', async (req, res) => {
-//     const { url } = req.query
-//     try {
-//         // Cargar la imagen con la ruta de tu imagen
-//         Jimp.read(url, (err, apple) => {
-//             if (err) {
-//                 // throw new Error("Error por throw");
-//                 console.error('Error al procesar la imagen:', err.message);
-//                 res.status(500).send('Error interno del servidor');
-//             } else {
-//                 apple
-//                     .resize(350, AUTO) // resize
-//                     .quality(100) // set JPEG quality
-//                     .greyscale() // set greyscale
-//                     .write(const newname = uuidv4().slice(0, 6).jpeg); // save
-//         res.sendFile(__dirname + newname);
-//     }
-      
-//      } catch (error) {
-//     // Manejar errores
-//     console.error('Error al procesar la imagen:', error);
-//     res.status(500).send('Error interno del servidor');
-// };
-// });
-
-// renombrar: 
-// const{ nombre, nuevo } = req.query
-//console.log("Valor de parametro nombre: ", nombre)
-//console.log("Valor de parametro nombre: ", nuevo)
-
-
-// Paso 3
-// fs.rename(nombre, nuevo, () => {
-//     res.status(200).send(`Archivo ${nombre} fue renombrado como ${nuevo}`)
-// })
