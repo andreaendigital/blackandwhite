@@ -31,7 +31,7 @@
           <!-- Formulario para insertar URL de la imagen -->
           <div class="card mb-4">
             <div class="card-body">
-              <h3 class="mb-3">Insertar URL de imagen:</h3>
+              <h3 class="mb-2">Insertar URL de imagen:</h3>
               <form action="/cargar" method="GET">
                 <div class="form-group">
                   <input
@@ -43,9 +43,11 @@
                     required
                   />
                 </div>
-                <button type="submit" class="btn btn-info">
-                  Cargar desde URL
-                </button>
+                <div class="d-flex justify-content-md-end">
+                  <button type="submit" class="btn btn-info mt-2">
+                    Cargar desde URL
+                  </button>
+                </div>
               </form>
             </div>
           </div>
@@ -53,29 +55,32 @@
           <!-- Formulario para cargar una imagen desde el dispositivo -->
           <div class="card">
             <div class="card-body">
-              <h3 class="mb-3">Cargar Imagen</h3>
+              <h3 class="mb-2">Cargar Imagen:</h3>
               <form
                 action="/cargar"
                 method="POST"
                 enctype="multipart/form-data"
               >
                 <div class="form-group">
-                  <label for="archivo">Selecciona una imagen:</label>
-                  <input
-                    type="file"
-                    class="form-control-file"
-                    id="archivo"
-                    name="archivo"
-                    required
-                  />
+                  <div class="mb-1">
+                    <input
+                      class="form-control"
+                      type="file"
+                      id="archivo"
+                      name="archivo"
+                      required
+                    />
+                  </div>
                 </div>
-                <button type="submit" class="btn btn-primary">
-                  Cargar desde Archivo
-                </button>
+                <div class="d-flex justify-content-md-end">
+                  <button type="submit" class="btn btn-info mt-1">
+                    Cargar desde Archivo
+                  </button>
+                </div>
               </form>
             </div>
           </div>
-          <div class="text-center mt-3">
+          <div class="text-center m-2">
             Proyecto creado por Luis Arce y Andrea Rosero
           </div>
         </div>
