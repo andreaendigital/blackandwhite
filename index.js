@@ -12,7 +12,7 @@ const Jimp = require('jimp');
 const { v4: uuidv4 } = require("uuid");
 const fs = require('fs');
 const path = require('path');
-const _ = require("lodash");
+// const _ = require("lodash");
 
 const app = express(); //instancio express
 
@@ -74,43 +74,42 @@ app.get('/', (req, res) => {
 // const { AUTO } = require('jimp');
 
 app.get('/cargar', async (req, res) => {
-    const { url } = req.query;
-    const {archivo} = req.query;
+    const { url } = req.query; //destructuring, obtengo el parámetro que necesito
+    const {archivo} = req.query; //destructuring, obtengo el parámetro que necesito
     try {
         // Cargar la imagen con la ruta de tu imagen
         // const imagen = await Jimp.read(url) || await Jimp.read(archivo);
+        if (url == '') {
+            throw new Error('Debe proporcionar una URL válida.');
+            // res.status(500).send('Error debe proporcionar url');
+        }
+        if (!url && !archivo) {
+            throw new Error('Debe proporcionar una URL o una ruta de archivo.');
+        }
         if (url) {
             // Si se proporciona una URL, carga la imagen desde la URL
             imagen = await Jimp.read(url);
-        } else if (archivo) {
+        } else {
             // Si se proporciona una ruta de archivo, carga la imagen desde el archivo
             imagen = await Jimp.read(archivo);
-        } else {
-            throw new Error('Debe proporcionar una URL o una ruta de archivo.');
-        }
+        } 
 
         //asigna un nombre definido por los primeros seis caracteres de UUID, con extensión.jpeg capturandolo en la variable "newname"
         const newname = uuidv4().slice(0, 6) + '.jpeg';
 
         await imagen
-            .resize(350, Jimp.AUTO) // resize
-            .quality(100) // set JPEG quality
-            .greyscale() // set greyscale
+            .resize(350, Jimp.AUTO) // redimensionada con ancho 350 y alto automatico proporcional.
+            .quality(100) // se determina la calidad
+            .greyscale() // se procesa a escala de grises/blanco y negro
             .writeAsync(newname); // guarda la imagen con el nuevo nombre definido previamente
         res.sendFile(__dirname + '/' + newname); //devuelve el archivo procesado al cliente, con el nuevo nombre asignado
 
     } catch (error) {
-        // let mensaje=""
-        //         if (err) {
-        //             (url)
-        //               ? mensaje = url + " No existe, "
-        //               : mensaje = "Falta la ruta de la imagen, "
-        //           return res.status(500).send(mensaje+err)
-        //         }
-        
+      
         // Manejar errores
         console.error('Error al procesar la imagen:', error.message);
         // Devuelve una respuesta de error al cliente
+        console.error(typeof error, 'url:' + typeof url);
         res.status(500).send('Error interno del servidor');
         
     }
