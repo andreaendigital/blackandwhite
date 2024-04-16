@@ -1,0 +1,8 @@
+body {
+  /* Establece la imagen de fondo */
+  background-image: url("/black-white-background.jpg");
+
+  /* Ajusta el tamaño y el posicionamiento de la imagen */
+  background-size: cover; /* Para cubrir todo el cuerpo */
+  background-position: center; /* Para centrar la imagen */
+}

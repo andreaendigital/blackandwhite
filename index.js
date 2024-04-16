@@ -23,7 +23,9 @@ app.listen(PORT, () => {
 });
 
 // Defino la ruta a carpeta pública de los archivos para llamar al css
-app.use(express.static(__dirname + "./assets/css"));
+app.use(express.static(__dirname + "/assets"));
+// app.use(express.static(__dirname + "/assets/img"));
+// app.use(express.static('assets'));
 
 //crear un middleware que define una ruta /bootstrap y libere el contenido de la carpeta "css", 
 //dependencia de bootstrap en el node_module previamente instalada con nmp
@@ -52,11 +54,9 @@ app.get('/', (req, res) => {
 
 //         let mensaje=""
 //         if (err) {
-
 //             (url)
 //               ? mensaje = url + " No existe, "
 //               : mensaje = "Falta la ruta de la imagen, "
-
 //           return res.status(500).send(mensaje+err)
 //         }
 
@@ -100,6 +100,14 @@ app.get('/cargar', async (req, res) => {
         res.sendFile(__dirname + '/' + newname); //devuelve el archivo procesado al cliente, con el nuevo nombre asignado
 
     } catch (error) {
+        // let mensaje=""
+        //         if (err) {
+        //             (url)
+        //               ? mensaje = url + " No existe, "
+        //               : mensaje = "Falta la ruta de la imagen, "
+        //           return res.status(500).send(mensaje+err)
+        //         }
+        
         // Manejar errores
         console.error('Error al procesar la imagen:', error.message);
         // Devuelve una respuesta de error al cliente

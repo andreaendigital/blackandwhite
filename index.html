@@ -3,50 +3,76 @@
   <head>
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" /> -->
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <!-- importo bootstrap desde la ruta definida en servidor  -->
-      <link rel="stylesheet" href="/bootstrap/bootstrap.css">
-       <!-- kit fontawesome  -->
-        <script
-        src="https://kit.fontawesome.com/3f1f63e199.js"
-        crossorigin="anonymous"
-      ></script>
-          <!-- importo bootstrap js desde la ruta definida en servidor -->
-      <script src="/bootstrapjs/bootstrap.js"></script>
-      <title>Black and White</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- importo bootstrap desde la ruta definida en servidor  -->
+    <link rel="stylesheet" href="/bootstrap/bootstrap.css" />
+    <!-- kit fontawesome  -->
+    <script
+      src="https://kit.fontawesome.com/3f1f63e199.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- importo bootstrap js desde la ruta definida en servidor -->
+    <script src="/bootstrapjs/bootstrap.js"></script>
+    <!-- Vincula el archivo style.css -->
+    <link rel="stylesheet" href="style.css" />
+    <title>Black and White</title>
   </head>
-  
-  <div class="row w-75 m-5">
-    <h2 class="text-center">Black and White </h2>
-    <!-- Leer -->
-    <div class="col-12  contaienr p-5">
-    
-    
-        <h3>Inserte URL de imagen: </h3>
-      <form action="/cargar">
-        <div class="form-group">
-          <!-- Nombre del archivo -->
-          <input name="url" class="form-control" id="url" />
+
+  <body>
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-8">
+          <h2 class="text-center mb-4">Black and White</h2>
+          <!-- Formulario para insertar URL de la imagen -->
+          <div class="card mb-4">
+            <div class="card-body">
+              <h3 class="mb-3">Insertar URL de imagen:</h3>
+              <form action="/cargar" method="GET">
+                <div class="form-group">
+                  <input
+                    type="url"
+                    class="form-control"
+                    id="url"
+                    name="url"
+                    placeholder="URL de la imagen"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn btn-info">
+                  Cargar desde URL
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Formulario para cargar una imagen desde el dispositivo -->
+          <div class="card">
+            <div class="card-body">
+              <h3 class="mb-3">Cargar Imagen</h3>
+              <form
+                action="/cargar"
+                method="POST"
+                enctype="multipart/form-data"
+              >
+                <div class="form-group">
+                  <label for="archivo">Selecciona una imagen:</label>
+                  <input
+                    type="file"
+                    class="form-control-file"
+                    id="archivo"
+                    name="archivo"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  Cargar desde Archivo
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
-  
-        <button type="submit" class="btn btn-info">Consultar archivo</button>
-        
-        
-      </form>
+      </div>
     </div>
-    <div>
-        <h1>Cargar Imagen</h1>
-    <form action="/cargar" method="GET">
-        <label for="imagen">Selecciona una imagen:</label>
-        <input type="file" id="archivo" name="archivo">
-        <button type="submit">Cargar</button>
-    </form>
-    
-
-
-
-    
- 
-    </div>
-  </div>
+  </body>
+</html>
