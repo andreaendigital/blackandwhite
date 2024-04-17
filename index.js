@@ -50,13 +50,15 @@ app.get('/cargar', async (req, res) => {
         if (url == '') { //si en el input se introduce un string vacío
             throw new Error('Debe proporcionar una URL válida.'); //mensaje a mostrar
         }
-        if (!archivo) { //si la variable está vacía, null o undefined
+        if (archivo == '') { //si la variable está vacía, null o undefined
             throw new Error('Debe proporcionar una ruta de archivo.'); //mensaje a mostrar
         }
         if (url) {
             // Si se proporciona una URL, carga la imagen desde la URL
             imagen = await Jimp.read(url);
         } else {
+            console.log('estoy aqui', archivo);
+    
             // Si se proporciona una ruta de archivo, carga la imagen desde el archivo
             imagen = await Jimp.read(archivo);
         } 
