@@ -37,6 +37,10 @@ app.use('/bootstrap',
 app.use('/bootstrapjs',
     express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 
+//configuro carpeta public como publica
+
+app.use(express.static(__dirname + "/public"));   
+
 // Ruta raíz para mostrar el formulario HTML
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/index.html");
