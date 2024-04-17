@@ -1,3 +1,5 @@
+/* Archivo Externo CSS alojado en servidor en carpeta "public" ubicada en la raíz, declarada como pública en el backend . */
+
 body {
   margin: 0;
   height: 100vh;
